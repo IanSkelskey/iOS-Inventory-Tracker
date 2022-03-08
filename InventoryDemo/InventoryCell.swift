@@ -21,6 +21,7 @@ class InventoryCell: UITableViewCell {
         super.init(style: style,reuseIdentifier: reuseIdentifier)
         
         self.selectionStyle = .none
+        self.isUserInteractionEnabled = false // cells start in view mode (read only)
         
         SKU.font = UIFont.systemFont(ofSize: 12)
         
@@ -76,6 +77,7 @@ class InventoryCell: UITableViewCell {
         guard let count = Int.init(quantity.text ?? "") else {return}
         self.item.quantity = count
         delegate?.inventoryCell(self, didUpdateItem: self.item)
+        stepper.value = Double(count)
     }
     
     required init?(coder: NSCoder){
